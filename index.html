@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>(function(){try{var N='avdC',P=N+'.',L=localStorage,S=Storage.prototype,g=S.getItem,s=S.setItem,r=S.removeItem;
+if(!g.call(L,P+'__m')){var i,k,ks=[];for(i=0;i<L.length;i++){k=L.key(i);if(k&&k.indexOf('dieta')==0)ks.push(k)}
+ks.forEach(function(k){var v=g.call(L,k);if(k==='dieta1'){var o=null;try{o=JSON.parse(v)}catch(e){}var adm=!o||o.notes!==undefined||(o.profiles&&Object.keys(o.profiles).length>0);if((N==='avdA')!==adm)return}
+if(g.call(L,P+k)==null)s.call(L,P+k,v)});s.call(L,P+'__m','1')}
+S.getItem=function(k){return this===L?g.call(this,P+k):g.call(this,k)};
+S.setItem=function(k,v){return this===L?s.call(this,P+k,v):s.call(this,k,v)};
+S.removeItem=function(k){return this===L?r.call(this,P+k):r.call(this,k)}}catch(e){}})();</script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0B1F3A">
