@@ -1087,6 +1087,42 @@ Mantequilla Delizia|cucharada|14|0.9|0.1|81
 Crema de leche Delizia|cucharada|15|2|3|35
 Leche en polvo entera Delizia|cucharada|12|26|38|27
 Dulce de leche Delizia|cucharada|20|7|55|7
+Leche light Delizia|vaso|250|3|4.9|1
+Leche deslactosada light Delizia|vaso|250|3|4.9|0.9
+Yogur Silueta de vainilla Delizia|vaso|200|3.8|7.5|2
+Yogur familiar de mora Delizia|vaso|250|3.1|12.1|2.7
+Yogur griego de piña Delizia|pote|170|4.9|15.5|3.6
+Yogumix de vainilla con grageas de chocolate Delizia|pote|130|3.7|25.7|7.8
+Leche Vaquita de avena Delizia|sachet|120|3.3|12.5|1.7
+Yogur Silueta de frutilla Delizia|vaso|200|3.8|7.5|2
+Yogur Silueta de durazno Delizia|vaso|200|3.8|7.5|2
+Yogur bebible de durazno Delizia|vaso|250|2.8|13|1.5
+Yogur bebible de mora Delizia|vaso|250|2.8|13|1.5
+Yogur bebible de vainilla Delizia|vaso|250|2.8|13|1.5
+Yogur bebible natural Delizia|vaso|250|3.2|6|2.5
+Yogur familiar de frutilla Delizia|vaso|250|3.1|12.1|2.7
+Yogur familiar de durazno Delizia|vaso|250|3.1|12.1|2.7
+Yogur griego natural Delizia|pote|170|8|4.5|5
+Yogur griego cero azúcar Delizia|pote|170|9|4|0.3
+Yogur griego de frutilla Delizia|pote|170|4.9|15|3.6
+Yogur griego para niños Delizia|pote|100|4.5|14|3
+Yogur Chiquidrink batido Delizia|vaso|95|2.8|13|1.5
+Chiquidrink de frutilla Delizia|sachet|120|2.8|11|1.5
+Yogur Proactive Delizia|vaso|200|3.2|12|2.5
+Yogur Proactive Plus con musli frutal Delizia|pote|125|3.5|17|2.5
+Yogur Proactive Defense de miel y jengibre Delizia|pote|200|3.3|13|2.4
+Kéfir Delizia|vaso|200|3.8|4.5|3.5
+Protein Shake Delizia|vaso|200|9|6|1.2
+Petit Suisse Tiki Tito de frutilla Delizia|pote|50|6|12|5
+Café con leche UHT Delizia|vaso|250|2.8|8|1.8
+Crema untable Delizia|cucharada|15|6|4|22
+Helado de vainilla Delizia|bola|60|3.5|22|11
+Helado de chocolate Delizia|bola|60|3.8|24|11
+Helado de frutilla Delizia|bola|60|3|23|9
+Helado Cassata Delizia|bola|60|3.4|24|10
+Postre helado Tentación Delizia|porción|80|3.5|25|12
+Paleta helada de crema Delizia|paleta|60|2|22|6
+Cono de helado Delizia|cono|100|3|28|12
 Leche evaporada Gloria|cucharada|15|7|10|8
 Leche evaporada light Gloria|cucharada|15|7|11|1
 Leche entera UHT Gloria|vaso|250|3|4.7|3.3
@@ -2006,12 +2042,50 @@ const REV=[['Quinua cocida',89,2.8,16.3,1.3,'Tablas Peruanas de Composición de 
 ['Amaranto cocido',95,3.5,18.6,1.8,'Calculado desde kiwicha cruda (CENAN/INS: 351 kcal) con la relación de la quinua cocida'],
 ['Tarwi (chocho) cocido',152,11.6,9.6,8.6,'Villaverde 2011, citado en Cientifi-k (UCV, Perú), tarwi cocido'],
 ['Carne de llama cocida',135,28,0,2.5,'Grasa de 0,5 a 2 % en carne cruda de llama (SciELO Bolivia, 2018); cocida estimada'],
-['Lomo de llama a la plancha',140,28,0,3,'Grasa de 0,5 a 2 % en carne cruda de llama (SciELO Bolivia, 2018); cocida estimada']];
+['Lomo de llama a la plancha',140,28,0,3,'Grasa de 0,5 a 2 % en carne cruda de llama (SciELO Bolivia, 2018); cocida estimada'],
+['Leche light Delizia',40,3,4.9,1,'Open Food Facts: etiqueta Delizia (leche light 800 ml), por 100 ml'],
+['Leche deslactosada light Delizia',40,3,4.9,0.9,'Open Food Facts: etiqueta Delizia (leche deslactosada light 800 ml), por 100 ml'],
+['Yogur Silueta de vainilla Delizia',64,3.8,7.5,2,'Open Food Facts: etiqueta Delizia (yogurt Silueta vainilla 1 L), por 100 g'],
+['Yogur familiar de mora Delizia',81,3.1,12.1,2.7,'Open Food Facts: etiqueta Delizia (yogurt familiar mora 2 kg), por 100 g'],
+['Yogur griego de piña Delizia',115,4.9,15.5,3.6,'Open Food Facts: etiqueta Delizia (yogurt griego piña 170 g), por 100 g'],
+['Yogumix de vainilla con grageas de chocolate Delizia',184,3.7,25.7,7.8,'Open Food Facts: etiqueta Delizia (Yogumix 130 g), por 100 g'],
+['Leche Vaquita de avena Delizia',80,3.3,12.5,1.7,'Open Food Facts: etiqueta Delizia (leche Vaquita avena 120 ml), por 100 ml'],
+['Yogur Silueta de frutilla Delizia',63,3.8,7.5,2,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur Silueta de durazno Delizia',63,3.8,7.5,2,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur bebible de durazno Delizia',77,2.8,13,1.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur bebible de mora Delizia',77,2.8,13,1.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur bebible de vainilla Delizia',77,2.8,13,1.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur bebible natural Delizia',59,3.2,6,2.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur familiar de frutilla Delizia',85,3.1,12.1,2.7,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur familiar de durazno Delizia',85,3.1,12.1,2.7,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur griego natural Delizia',95,8,4.5,5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur griego cero azúcar Delizia',55,9,4,0.3,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur griego de frutilla Delizia',112,4.9,15,3.6,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur griego para niños Delizia',101,4.5,14,3,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur Chiquidrink batido Delizia',77,2.8,13,1.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Chiquidrink de frutilla Delizia',69,2.8,11,1.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur Proactive Delizia',83,3.2,12,2.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur Proactive Plus con musli frutal Delizia',104,3.5,17,2.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Yogur Proactive Defense de miel y jengibre Delizia',87,3.3,13,2.4,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Kéfir Delizia',65,3.8,4.5,3.5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Protein Shake Delizia',71,9,6,1.2,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Petit Suisse Tiki Tito de frutilla Delizia',117,6,12,5,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Café con leche UHT Delizia',59,2.8,8,1.8,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Crema untable Delizia',238,6,4,22,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Helado de vainilla Delizia',201,3.5,22,11,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Helado de chocolate Delizia',210,3.8,24,11,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Helado de frutilla Delizia',185,3,23,9,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Helado Cassata Delizia',200,3.4,24,10,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Postre helado Tentación Delizia',222,3.5,25,12,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Paleta helada de crema Delizia',150,2,22,6,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Cono de helado Delizia',232,3,28,12,'Estimado a partir de lácteos similares (Delizia no publica su tabla nutricional en la web): confirma con tu envase'],
+['Leche deslactosada Delizia',60,3,4.9,2.8,'Open Food Facts: etiqueta Delizia (leche deslactosada UHT 800 ml), por 100 ml']];
 (()=>{const m=new Map(REV.map(r=>[r[0],r]));const up=f=>{const r=m.get(f.n);if(r&&f.src!==r[5]){f.k=r[1];f.p=r[2];f.c=r[3];f.g=r[4];f.src=r[5]}};LIB.forEach(up);window._upSrc=up})();
 LIB.forEach(f=>{ap(f);if(!f.w){f.u='porción';f.w=100;f.s=.5;(window._fb=window._fb||[]).push(f.n)}});S.foods.forEach(ap);S.foods.forEach(window._upSrc);
-const lf=(f,k)=>(k=='t'||k=='m'||k=='s'||k=='v'||k=='x')?f.dt==k:!f.dt&&cat(f)==k;
+const lf=(f,k)=>k=='k'?!!f.ce:(k=='t'||k=='m'||k=='s'||k=='v'||k=='x')?f.dt==k:!f.dt&&cat(f)==k;
+LIB.forEach(f=>{if(/Coronilla/.test(f.n)&&!f.dt&&cat(f)=='c')f.ce=1});
 const SUPL=()=>{try{return JSON.parse(localStorage.getItem('dieta_sup'))||[]}catch(e){return[]}};
-const GO=['p','c','g','v','x','t','m','s'],GR={p:['Proteínas','var(--p)','#fff'],c:['Carbohidratos','var(--c)','#fff'],g:['Grasas','var(--g)','#1c1c1d'],v:['Verduras y ensaladas','#2F8F5B','#fff'],x:['Suplementos','#7B4FD0','#fff'],t:['Platos típicos','#C2571A','#fff'],m:['Platos comunes','#1F8AA8','#fff'],s:['Snacks','#C23B7A','#fff']},gk=f=>f.dt||cat(f);
+const GO=['p','c','k','g','v','x','t','m','s'],GR={p:['Proteínas','var(--p)','#fff'],c:['Carbohidratos','var(--c)','#fff'],k:['Celíacos','#0E7C86','#fff'],g:['Grasas','var(--g)','#1c1c1d'],v:['Verduras y ensaladas','#2F8F5B','#fff'],x:['Suplementos','#7B4FD0','#fff'],t:['Platos típicos','#C2571A','#fff'],m:['Platos comunes','#1F8AA8','#fff'],s:['Snacks','#C23B7A','#fff']},gk=f=>f.dt||cat(f);
 function libUI(){$('#lt').innerHTML=GO.map(k=>{const on=k==LT,c=GR[k][1];return`<button data-lt="${k}" style="border:2px solid ${c};${on?`background:${c};color:${GR[k][2]}`:`border-left-width:6px`}">${GR[k][0]} (${LIB.filter(f=>lf(f,k)).length})</button>`}).join('');
 document.querySelectorAll('[data-lt]').forEach(b=>b.onclick=()=>{LT=b.dataset.lt;libUI()});libList()}
 function libList(){const nz=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),q=nz($('#ls').value.trim()),l=LIB.filter(f=>(q?nz(f.n).includes(q):lf(f,LT)));if(q)l.sort((a,b)=>GO.indexOf(gk(a))-GO.indexOf(gk(b)));
@@ -2027,7 +2101,7 @@ o.pork=T(/cerdo|chancho|lechon|tocino|jamon|chorizo|longaniza|salchicha|mortadel
 o.fish=T(/trucha|pejerrey|surubi|pacu|sardina|atun|pescado|sabalo|dorado|salmon|camaron|ceviche|sushi|marisco/);
 o.nokosher=T(/llama|cuy|conejo|surubi|bagre|camaron|marisco/);
 o.egg=T(/albumina|huevo|clara de|yema|mayonesa|omelette|papa rellena/);
-o.dairy=/caseina|suero|ganador de masa|serious mass|mutant mass|mass-tech|true-mass|super mass|syntha|nitro-tech|iso100|hydrowhey|gold standard 100% (whey|casein)|leche|queso|yogur|requeson|crema|mantequilla|quesillo|dulce de leche|sonso|cunape|helado|flan|natilla|\bpil\b|whey|huminta|empanada de queso|arroz con queso/.test(t2);
+o.dairy=/caseina|suero|ganador de masa|serious mass|mutant mass|mass-tech|true-mass|super mass|syntha|nitro-tech|iso100|hydrowhey|gold standard 100% (whey|casein)|leche|queso|yogur|requeson|crema|mantequilla|quesillo|dulce de leche|sonso|cunape|helado|flan|natilla|\bpil\b|delizia|kefir|petit suisse|whey|huminta|empanada de queso|arroz con queso/.test(t2);
 o.lactose=o.dairy&&!T(/deslactosad/);
 o.honey=T(/miel/);o.gelatin=T(/gelatina|gomitas|malvavisco/);
 o.gluten=!T(/sin gluten|arroz inflado|de arroz/)&&T(/\b(pan|marraqueta|batalla|galleta|fideo|tallarin|spaghetti|pasta|harina|trigo|avena|cebada|centeno|empanada|saltena|tucumana|milanesa|apanad|rebozad|cereal|granola|wafer|alfajor|torta|queque|donut|croissant|bagel|wrap|lasana|ravioles|noqui|oreo|ritz|chips ahoy|club social|tuc|kitkat|bon o bon|ferrero|pringles|pizza|calzone|burrito|quesadilla|shawarma|sandwich|salchipapa|hot dog|crispy|nuggets|chicken kingdom|medialuna|pastel|bunuelo|pukacapa|brazo gitano|japones|churro|tostada|cracker|pretzel|mantecada|panqueque|waffle|bizcocho|rosquete|hamburguesa|salchicha|mortadela|broaster)\b/);
