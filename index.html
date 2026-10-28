@@ -9,7 +9,7 @@ if(g.call(L,P+k)==null)s.call(L,P+k,v)});s.call(L,P+'__m','1')}
 S.getItem=function(k){return this===L?g.call(this,P+k):g.call(this,k)};
 S.setItem=function(k,v){return this===L?s.call(this,P+k,v):s.call(this,k,v)};
 S.removeItem=function(k){return this===L?r.call(this,P+k):r.call(this,k)}}catch(e){}})();</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nhG/gGTvu0gMFDrCP7rR9vNpCVJafWVeE0RRA2egu9s=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-K18GXyljd3rb4Sa2Hv+aCLFpr/oOwv+y4eNR/iWiY7k=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nhG/gGTvu0gMFDrCP7rR9vNpCVJafWVeE0RRA2egu9s=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-h5kAZw2oje0KAWkqsvB0+qTKPVlcnAglMUytqItbFdw=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0B1F3A">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -253,6 +253,9 @@ return`<div class="seg" role="img" aria-label="Reparto del plato por peso">${ks.
 S.vw=(()=>{try{return JSON.parse(localStorage.getItem('dieta_vw'))||{on:0,s:0}}catch(e){return{on:0,s:0}}})();const vwSave=()=>{try{localStorage.setItem('dieta_vw',JSON.stringify(S.vw))}catch(e){}};
 
 /* ===== Modo "el cliente elige": opciones por comida ===== */
+function lkOf(c){const r=[];if(!c)return r;const n=+(S.p&&S.p.meals)||6;for(let m=0;m<n;m++){if((c.fz&&c.fz[m])||Object.keys(c.i||{}).some(q=>q.startsWith(m+'|')))r.push(m)}return r}
+function ensureFm(k){const c=CH(k);if(!c.fmu)c.fm=(S.p&&S.p.fmode=='reg')?1:0;return c}
+function setFmode(k,v){if(S.p)S.p.fmode=v?'reg':'sel';const c=CH(k);c.fm=v?1:0;c.fmu=1;save()}
 function optOn(){return !!S.p&&S.p.opt!=='all'}
 function optMax(){const n=+(S.p&&S.p.pkn);return n>=1?n:2}
 function pkl(){try{return JSON.parse(localStorage.getItem('dieta_pkl')||'{}')||{}}catch(e){return{}}}
@@ -270,6 +273,7 @@ function optH(o,m,c,ro){if(!optOn()||!o.pool)return'';const pk=(c&&c.pk&&c.pk[m]
 const last=(pkl()[m]||[]).filter(x=>['p','c','g','v'].some(k=>o.pool[k].some(f=>f.n==x)));
 return '<div class="opt">'+['p','c','g','v'].map(k=>{const l=o.pool[k];if(!l.length)return'';return`<div class="og"><div class="ol" style="color:${G[k][1]}">${G[k][0]}${k=='v'?'':(lim>3?' · elige los que quieras':' · elige hasta '+lim)}</div><div class="oc">${l.map(f=>{const on=pk.includes(f.n);return`<button type="button" class="ob${on?' on':''}" data-pk="${m}|${esc(f.n)}"${ro?' disabled':''} aria-pressed="${on}">${on?'✓ ':''}${esc(f.n)}</button>`}).join('')}</div></div>`}).join('')
 +(!ro&&!pk.length&&last.length?`<div class="row" style="margin:6px 0 0"><button type="button" class="x" data-pkr="${m}">Usar mis elecciones de la última vez</button></div>`:'')
++(pk.length&&['p','c','g'].some(k=>o.pool[k].length&&!o.pool[k].some(f=>pk.includes(f.n)))?`<div class="hint" style="margin:6px 0 0">Sin elegir de ${['p','c','g'].filter(k=>o.pool[k].length&&!o.pool[k].some(f=>pk.includes(f.n))).map(k=>G[k][0].toLowerCase()).join(', ')}: lo que te corresponde se reparte en tus otras comidas del día.</div>`:'')
 +(!ro&&o.need&&o.need.length?`<div class="hint" style="margin:6px 0 0">Falta elegir: ${o.need.map(k=>G[k][0].toLowerCase()).join(', ')}. La app calcula la cantidad según lo que elijas.</div>`:'')+'</div>'}
 function optAmt(T,m,f,pool){const g0=cat(f),pk=[f.n];['p','c','g'].forEach(k=>{if(k!=g0&&pool[k][0])pk.push(pool[k][0].n)});const r=gen({...T,opt:1,pk:{[m]:pk}});if(r.miss||!r.out[m])return null;const it=r.out[m].it.find(x=>x.f===f);return it?it.x:null}
 function optTxt(o){const G={p:'Proteínas',c:'Carbohidratos',g:'Grasas'};return ['p','c','g'].map(k=>o.pool[k].length?G[k]+': '+o.pool[k].map(f=>f.n).join(' / '):'').filter(Boolean).join(' · ')}
@@ -283,7 +287,10 @@ for(let m=0;m<n;m++){const ms=['p','c','g'].filter(k=>!(OPT?P0(m):L(m))[k].lengt
 if(bad.length)return{miss:1,msg:bad.join('; ')};
 const rd=x=>x>=25?Math.round(x/5)*5:Math.round(x);
 const pg=(f,k)=>Math.max(f[k]/f.q,1e-6),sm=(l,x,k)=>l.reduce((t,h,j)=>t+x[j]*pg(h,k),0),cl=(x,m)=>Math.min(m,Math.max(0,x));
-for(let m=0;m<n;m++){const s=sh[m],ov=T.ov&&T.ov[m],tp=ov?ov.P:T.P*s,tc=ov?ov.C:T.C*s,tg=ov?ov.G:T.G*s,{c,p,g,v:vg}=L(m);
+const B=[];for(let m=0;m<n;m++){const s=sh[m],ov=T.ov&&T.ov[m];B.push({P:ov?ov.P:T.P*s,C:ov?ov.C:T.C*s,G:ov?ov.G:T.G*s})}
+if(OPT){const tch=m=>((T.pk&&T.pk[m])||[]).length>0,lk=m=>(T.lk||[]).includes(m);[['p','P'],['c','C'],['g','G']].forEach(([k,K])=>{const D=[],R=[];for(let m=0;m<n;m++){if(lk(m))continue;const h=L(m)[k].length>0;if(tch(m)&&!h)D.push(m);else if(h||!tch(m))R.push(m)}
+if(D.length&&R.length){const ex=D.reduce((t,m)=>t+B[m][K],0),ws=R.reduce((t,m)=>t+sh[m],0)||1;D.forEach(m=>B[m][K]=0);R.forEach(m=>B[m][K]+=ex*sh[m]/ws)}})}
+for(let m=0;m<n;m++){const s=sh[m],tp=B[m].P,tc=B[m].C,tg=B[m].G,{c,p,g,v:vg}=L(m);
 let gc=c.map(f=>tc/c.length/pg(f,'c')),gp=p.map(f=>tp/p.length/pg(f,'p'));
 for(let r=0;r<3;r++){gp=p.map(f=>cl((tp-sm(c,gc,'p'))/p.length/pg(f,'p'),700));gc=c.map(f=>cl((tc-sm(p,gp,'c'))/c.length/pg(f,'c'),700))}
 const gf=g.map(f=>cl((tg-sm(c,gc,'g')-sm(p,gp,'g'))/g.length/pg(f,'g'),300));
@@ -2256,7 +2263,7 @@ const sigOf=i=>JSON.stringify(S.wk[i].s.map(x=>[x.i,+x.m]));
 function reconcile(i,T1){const k=dayKey(i),c=S.chk[k];if(!c)return'';const now=sigOf(i);if(!c.sig){c.sig=now;return''}if(c.sig===now)return'';
 c.i=c.i||{};c.fz=c.fz||{};c.ov=c.ov||{};const oldS=JSON.parse(c.sig),cur=S.wk[i].s,sg=a=>a.length?a.map(x=>x[0]).join(' + '):'descanso',was=sg(oldS),n=+S.p.meals,sh=shOf(n);c.sig=now;
 if(!Object.keys(c.i).length&&!Object.keys(c.fz).length){c.ov={};return''}
-let g0;S.wk[i].s=oldS.map(a=>({i:a[0],m:a[1]}));try{const T0=dayT(i);g0=gen({...T0,ov:c.ov,sw:c.sw,pk:c.pk,opt:1})}finally{S.wk[i].s=cur}
+let g0;S.wk[i].s=oldS.map(a=>({i:a[0],m:a[1]}));try{const T0=dayT(i);g0=gen({...T0,ov:c.ov,sw:c.sw,pk:c.pk,lk:lkOf(c),opt:1})}finally{S.wk[i].s=cur}
 if(!g0||g0.miss)return'';
 g0.out.forEach((o,m)=>{if(c.fz[m])return;const kept=o.it.filter(x=>c.i[m+'|'+x.f.n]);if(kept.length)c.fz[m]=kept.map(({f,x})=>({n:f.n,x:(c.pq&&c.pq[m+'|'+f.n]!=null?c.pq[m+'|'+f.n]:x)}))});
 const E={P:0,C:0,G:0},plan={P:0,C:0,G:0};Object.keys(c.fz).forEach(m=>{c.fz[m].forEach(z=>{const f=S.foods.find(y=>y.n==z.n);if(f){const r=z.x/f.q;E.P+=f.p*r;E.C+=f.c*r;E.G+=f.g*r}});['P','C','G'].forEach(q=>plan[q]+=T1[q]*sh[m])});
@@ -2269,7 +2276,7 @@ let m='Cambiaste las sesiones del día ('+was+' → '+sg(JSON.parse(now))+'). Lo
 m+=Math.abs(dif)<20?' Tu consumo coincide con lo que el nuevo plan asigna a esas comidas.':dif>0?' Comiste unas '+r0(dif)+' kcal más de lo que el nuevo plan asigna a esas comidas: se descontaron de '+av.map(j=>NM[n][j]).join(', ')+'.':' Comiste unas '+r0(-dif)+' kcal menos de lo que el nuevo plan asigna a esas comidas: se sumaron a '+av.map(j=>NM[n][j]).join(', ')+'.';
 if(over>40)m+=' Aviso: el exceso es grande y no cabe del todo en las comidas que faltan (quedaron con un mínimo del 30 %). Cerca de '+r0(over)+' kcal quedan sobre el objetivo del día.';
 return m}
-function mealsC(T){{const rm=reconcile(S.sel,T);if(rm)CMSG=rm}const k=dayKey(S.sel),c=S.chk[k]||{i:{},fz:{},ov:{}},g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,opt:1});
+function mealsC(T){{const rm=reconcile(S.sel,T);if(rm)CMSG=rm}const k=dayKey(S.sel),c=S.chk[k]||{i:{},fz:{},ov:{}},g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,lk:lkOf(c),opt:1});
 if(g.miss)return'<div class="warn">Falta seleccionar alimentos en: <b>'+g.msg+'</b>.</div>';
 const tot={k:0,p:0,c:0,g:0},add=(f,x)=>{const r=x/f.q;tot.k+=f.k*r;tot.p+=f.p*r;tot.c+=f.c*r;tot.g+=f.g*r};
 const cards=g.out.map((o,m)=>{CM[m]=o.it.map(x=>x.f.n);const fz=c.fz&&c.fz[m];let li,all=false,pend=false,tag='';
@@ -2280,7 +2287,7 @@ return`<div class="meal"${all?' style="border-color:var(--ok)"':''}><h3><span>${
 (c.x||[]).forEach(z=>{const f=FX(z.n);if(f)add(f,z.x)});const bar=(l,a,t,col,u)=>`<div class="bar"><span>${l}</span><i><span style="width:${Math.min(100,a/(t||1)*100)}%;background:${col}"></span></i><span>${r0(a)} / ${r0(t)} ${u}</span></div>`;
 return`<div class="hint" style="margin:0 0 8px">Registro del ${k}. Marca cada alimento o comida que cumpliste. Si no lo hiciste, pulsa "Compensar" para repartir lo que faltó entre las comidas que aún no marcaste.</div>${CMSG?`<div class="warn" style="margin:0 0 10px">${esc(CMSG)}</div>`:''}<div class="chk" style="margin:0 0 12px">${bar('Calorías',tot.k,T.k,'var(--nv)','kcal')}${bar('Proteínas',tot.p,T.P,'var(--p)','g')}${bar('Carbohidratos',tot.c,T.C,'var(--c)','g')}${bar('Grasas',tot.g,T.G,'var(--g)','g')}</div><div class="meals">${cards}</div>${vegH(g)}${extraH(c)}<div class="row"><button data-cr="1">Restablecer el día</button></div>`}
 function pinit(i){const k=dayKey(i),c=S.chk[k]||(S.chk[k]={i:{},fz:{},ov:{}});if(!c.sig)c.sig=sigOf(i);c.i=c.i||{};c.fz=c.fz||{};c.ov=c.ov||{};c.pq=c.pq||{};return c}
-function compMeal(i,m){const c=pinit(i),T=dayT(i),g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,opt:1});if(g.miss)return false;const o=g.out[m],n=+S.p.meals,sh=shOf(n);
+function compMeal(i,m){const c=pinit(i),T=dayT(i),g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,lk:lkOf(c),opt:1});if(g.miss)return false;const o=g.out[m],n=+S.p.meals,sh=shOf(n);
 const eat=({f,x})=>{const q=m+'|'+f.n;return c.i[q]?(c.pq[q]!=null?c.pq[q]:x):0};
 const ms=o.it.reduce((t,it)=>{const r=(it.x-eat(it))/it.f.q;t.P+=it.f.p*r;t.C+=it.f.c*r;t.G+=it.f.g*r;return t},{P:0,C:0,G:0});
 const av=[];for(let j=0;j<n;j++)if(j!=m&&!c.fz[j]&&!Object.keys(c.i).some(q=>q.startsWith(j+'|')))av.push(j);
@@ -2292,14 +2299,15 @@ c.fz[m]=o.it.filter(it=>c.i[m+'|'+it.f.n]).map(it=>({n:it.f.n,x:eat(it)}));
 const dk=ms.P*4+ms.C*4+ms.G*9,nm=av.map(j=>NM[n][j]).join(', ');
 CMSG=Math.abs(dk)<15?'Registrado. Lo que comiste coincide con el plan.':dk>0?'Compensado: faltaron unas '+r0(dk)+' kcal en '+o.nm+' ('+r0(ms.P)+' g de proteína, '+r0(ms.C)+' g de carbohidratos y '+r0(ms.G)+' g de grasas). Se repartieron en: '+nm+'.':'Comiste unas '+r0(-dk)+' kcal más de lo previsto en '+o.nm+'. Se descontaron de: '+nm+' (con un mínimo del 30 % en cada comida).';
 after();return true}
-function partialModal(i,m,fq){const c=pinit(i),T=dayT(i),g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,opt:1});if(g.miss)return;const o=g.out[m];if(!o)return;if(c.fz[m]){toast('Esta comida ya fue compensada. Usa "Restablecer el día" para cambiarla.');return}
-const rows=o.it.map(({f,x},j)=>{const q=m+'|'+f.n,e=c.i[q]?(c.pq[q]!=null?c.pq[q]:x):x;return`<div style="margin:0 0 10px"><div><b>${esc(f.n)}</b> · plan ${qty(f,x)}</div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px"><input type="number" inputmode="decimal" min="0" max="${Math.round(x*3)}" step="5" value="${r0(e)}" data-pp="${j}" style="width:100px" aria-label="Gramos de ${esc(f.n)}"> <span>g comidos</span><button class="x" data-pf="${j}">Todo</button><button class="x" data-p0="${j}">Nada</button></div></div>`}).join('');
-const md=mdl(`<h3 style="margin:0 0 6px">${esc(o.nm)}: ¿cuánto comiste?</h3><p class="hint" style="margin:0 0 10px">Escribe los gramos que realmente comiste de cada alimento (ej.: plan 500 g, comiste 200 g). Lo que falte o sobre se reparte en las comidas que todavía no registraste.</p>${rows}<div class="row"><button class="pr" id="ppo">Guardar y compensar</button><button class="x" id="ppc">Cancelar</button></div>`,'ptm');
-const inp=j=>md.querySelector('[data-pp="'+j+'"]');
-md.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{const j=+b.dataset.pf;inp(j).value=r0(o.it[j].x)});
+function partialModal(i,m,fq){const c=pinit(i),T=dayT(i),g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,lk:lkOf(c),opt:1});if(g.miss)return;const o=g.out[m];if(!o)return;if(c.fz[m]){toast('Esta comida ya fue compensada. Usa "Restablecer el día" para cambiarla.');return}
+const rows=o.it.map(({f,x},j)=>{const q=m+'|'+f.n,e=c.i[q]?(c.pq[q]!=null?c.pq[q]:x):x;return`<div style="margin:0 0 10px"><div><b>${esc(f.n)}</b> · plan ${qty(f,x)}</div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px"><input type="number" inputmode="decimal" min="0" max="${Math.round(x*3)}" step="5" value="${r0(e)}" data-pp="${j}" style="width:100px" aria-label="Cantidad de ${esc(f.n)}">${f.w?`<select data-pu="${j}" style="width:auto" aria-label="Medida"><option value="g">g</option><option value="u">${esc(plu(f,2))}</option></select>`:'<span>g</span>'} <span>comidos</span><button class="x" data-pf="${j}">Todo</button><button class="x" data-p0="${j}">Nada</button></div></div>`}).join('');
+const md=mdl(`<h3 style="margin:0 0 6px">${esc(o.nm)}: ¿cuánto comiste?</h3><p class="hint" style="margin:0 0 10px">Escribe cuánto comiste realmente de cada alimento, en gramos o en porciones (ej.: plan 500 g, comiste 200 g). Lo que falte o sobre se reparte en las comidas que todavía no registraste.</p>${rows}<div class="row"><button class="pr" id="ppo">Guardar y compensar</button><button class="x" id="ppc">Cancelar</button></div>`,'ptm');
+const inp=j=>md.querySelector('[data-pp="'+j+'"]'),uni=j=>{const s=md.querySelector('[data-pu="'+j+'"]');return s&&s.value=='u'},gv=j=>{let v=parseFloat(inp(j).value);if(isNaN(v))return NaN;return uni(j)?v*o.it[j].f.w:v},show=(j,g)=>{inp(j).value=uni(j)?Math.round(g/o.it[j].f.w*100)/100:r0(g);inp(j).step=uni(j)?'0.25':'5'};
+md.querySelectorAll('[data-pu]').forEach(sl=>{const j=+sl.dataset.pu;sl.dataset.pv='g';sl.onchange=()=>{const g=sl.dataset.pv=='u'?parseFloat(inp(j).value)*o.it[j].f.w:parseFloat(inp(j).value);sl.dataset.pv=sl.value;if(!isNaN(g))show(j,g)}});
+md.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{const j=+b.dataset.pf;show(j,o.it[j].x)});
 md.querySelectorAll('[data-p0]').forEach(b=>b.onclick=()=>{inp(+b.dataset.p0).value=0});
 $('#ppc').onclick=()=>md.remove();
-$('#ppo').onclick=()=>{let dev=false;o.it.forEach(({f,x},j)=>{const q=m+'|'+f.n;let v=parseFloat(inp(j).value);if(isNaN(v))v=x;v=Math.max(0,Math.min(x*3,v));if(v<=0){delete c.i[q];delete c.pq[q];dev=true}else{c.i[q]=1;if(Math.abs(v-x)<1)delete c.pq[q];else{c.pq[q]=Math.round(v*10)/10;dev=true}}});md.remove();
+$('#ppo').onclick=()=>{let dev=false;o.it.forEach(({f,x},j)=>{const q=m+'|'+f.n;let v=gv(j);if(isNaN(v))v=x;v=Math.max(0,Math.min(x*3,v));if(v<=0){delete c.i[q];delete c.pq[q];dev=true}else{c.i[q]=1;if(Math.abs(v-x)<1)delete c.pq[q];else{c.pq[q]=Math.round(v*10)/10;dev=true}}});md.remove();
 if(dev)compMeal(i,m);else{CMSG='';save();weekOut();if(window.hoyUI&&APPN=='c')hoyUI();toast('Comida registrada completa')}};
 const first=inp(fq>=0&&fq!=null?fq:0);if(first){first.focus();first.select()}}
 function bindC(){const k=dayKey(S.sel),W=()=>{const c=S.chk[k]||(S.chk[k]={i:{},fz:{},ov:{}});if(!c.sig)c.sig=sigOf(S.sel);return c},up=()=>{save();weekOut()};
@@ -2634,7 +2642,7 @@ const supList=()=>LS.j('dieta_sup',[]),supAdd=n=>{const l=supList();if(!l.includ
 const supDay=()=>LS.j('dieta_supd',{}),dyk=()=>dayKey(td());
 
 /* ---------- C. Intercambio rápido, y lo que comí fuera del plan ---------- */
-function swapOpen(m,name){const k=dayKey(S.sel),T=dayT(S.sel),c=CH(k);c.sw=c.sw||{};const f=S.foods.find(y=>y.n==name);if(!f)return;const g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,opt:1});if(g.miss)return;
+function swapOpen(m,name){const k=dayKey(S.sel),T=dayT(S.sel),c=CH(k);c.sw=c.sw||{};const f=S.foods.find(y=>y.n==name);if(!f)return;const g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,lk:lkOf(c),opt:1});if(g.miss)return;
 const here=new Set(g.out[m].it.map(x=>x.f.n)),cf=cat(f),orig=Object.keys(c.sw).find(q=>q.startsWith(m+'|')&&c.sw[q]==name),nz=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 const mine=S.foods.filter(a=>a.q>0&&cat(a)==cf&&!here.has(a.n)&&dtOk(a)),have=new Set(S.foods.map(a=>a.n)),lib=LIB.filter(a=>!have.has(a.n)&&!a.dt==!f.dt&&cat(a)==cf&&dtOk(a)&&!a.nc);
 const o=mdl(`<h3 style="margin:0 0 6px">Cambiar ${esc(name)}</h3><p class="hint" style="margin:0 0 8px">Solo para esta comida de hoy. Las cantidades se ajustan solas para mantener tus macros.</p>${orig?`<button class="x" data-r="1" style="width:100%;margin:0 0 6px">↩ Volver a ${esc(orig.slice(orig.indexOf('|')+1))}</button>`:''}<input id="swq" placeholder="Buscar otro alimento…" aria-label="Buscar alimento" style="margin:0 0 8px"><div id="swl"></div><div class="row"><button class="x" id="swc">Cerrar</button></div>`,'swm');
@@ -2659,14 +2667,15 @@ document.querySelectorAll('[data-fxr]').forEach(b=>b.onclick=()=>{const c=CH(k),
 
 /* ---------- Mensaje del entrenador, siguiente comida, suplementos (cliente) ---------- */
 document.head.insertAdjacentHTML('beforeend','<style>.mdl{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;display:flex;align-items:center;justify-content:center;padding:16px}.mdc{background:var(--sf);color:var(--ink);border-radius:12px;max-width:440px;width:100%;max-height:85vh;overflow:auto;padding:16px}.hn li{display:flex;justify-content:space-between;gap:10px;padding:4px 0}body.big .hn li,body.big .hn b{font-size:20px}body.big .hn h3{font-size:24px}.sl .x{margin-left:6px}@media print{.mdl{display:none}}</style>');
-function hoyX(){const el=$('#hoyc');if(!el||APPN!='c')return;try{const i=td(),T=dayT(i),k=dayKey(i),c=S.chk[k]||{i:{},fz:{},ov:{}},g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,opt:1});let h='';
+function hoyX(){const el=$('#hoyc');if(!el||APPN!='c')return;try{const i=td(),T=dayT(i),k=dayKey(i),_e=ensureFm(k),c=S.chk[k]||{i:{},fz:{},ov:{}},g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,lk:lkOf(c),opt:1});let h='';
 const mg=S.p&&S.p.msg;if(mg&&mg.x&&LS.g('dieta_msgd','')!=String(mg.t))h+=`<div class="cx" style="border-color:var(--ac);margin:0 0 12px"><b>Mensaje de tu entrenador</b><p style="margin:6px 0 8px;white-space:pre-wrap">${esc(mg.x)}</p><button class="x" id="msgok">Entendido</button></div>`;
 if(c.fm)h+=freeHoy(T,c,k);else if(!g.miss){const m=g.out.findIndex((o,j)=>!(c.fz&&c.fz[j])&&!(o.it.length&&o.it.every(x=>c.i[j+'|'+x.f.n])));
 if(m>=0){const o=g.out[m];h+=`<div class="cx hn" style="margin:0 0 12px"><b>Siguiente comida</b><h3 style="margin:4px 0 6px">${esc(o.nm)} · ${r0(o.mt.k)} kcal</h3>${optH(o,m,c,0)}<ul style="list-style:none;padding:0;margin:0">${o.it.map(({f,x})=>`<li><span>${esc(f.n)}</span><b>${qty(f,x)}</b></li>`).join('')}</ul><div class="row" style="margin-top:8px"><button class="pr" id="hnok"${o.it.length?'':' disabled'}>✓ Ya la comí</button><button id="hnpt"${o.it.length?'':' disabled'}>Comí solo una parte</button><label class="ck" style="margin:0"><input type="checkbox" id="hnbig"${LS.g('dieta_big','')=='1'?' checked':''}><span>Letra grande</span></label></div></div>`}
 else h+='<div class="cx hn" style="margin:0 0 12px"><b>Todas las comidas de hoy están cumplidas ✓</b></div>'}
 const sl=supList();if(sl.length){const d=supDay()[dyk()]||{};h+=`<div class="cx" style="margin:0 0 12px"><b>Suplementos de hoy</b>${sl.map(n=>`<label class="ck"><input type="checkbox" data-sd="${esc(n)}"${d[n]?' checked':''}><span>${esc(n)}</span> <button class="x" data-sx="${esc(n)}" style="padding:1px 7px;margin-left:6px" aria-label="Quitar ${esc(n)}">Quitar</button></label>`).join('')}</div>`}
-if(!c.fm)h='<div class="cx" style="margin:0 0 12px;border-color:var(--ac)"><b>¿Qué comiste hoy?</b><p class="hint" style="margin:4px 0 8px">Anota lo que realmente comiste y mira cuántas kcal te quedan en cada comida.</p><button class="pr" id="hfo" style="width:100%">Registrar lo que comí</button></div>'+h;
+h=`<div class="cx" style="margin:0 0 12px;border-color:var(--ac)"><b>¿Cómo harás tu dieta hoy?</b><div class="row" style="margin:8px 0 6px;gap:6px"><button class="${c.fm?'x':'pr'}" id="mdS" aria-pressed="${!c.fm}" style="flex:1">1 · Selección</button><button class="${c.fm?'pr':'x'}" id="mdR" aria-pressed="${!!c.fm}" style="flex:1">2 · Registrando</button></div><p class="hint" style="margin:0">${c.fm?'Anota cada alimento con su cantidad y mira cuántas kcal te quedan en cada comida.':'Elige los alimentos de cada grupo y la app te dice cuánto. Si no eliges un grupo, o no comes todo, se compensa en tus otras comidas.'}</p></div>`+h;
 el.insertAdjacentHTML('afterbegin',h);
+const mS=$('#mdS'),mR=$('#mdR');if(mS)mS.onclick=()=>{setFmode(k,0);weekOut();hoyUI()};if(mR)mR.onclick=()=>{setFmode(k,1);weekOut();hoyUI()};
 const hfr=$('#hfr');if(hfr)hfr.onclick=()=>{S.sel=td();const nb=document.querySelector('[data-nv="sem"]');if(nb)nb.click();weekOut()};const hfp=$('#hfp');if(hfp)hfp.onclick=()=>{CH(k).fm=0;save();weekOut();hoyUI()};const hfo=$('#hfo');if(hfo)hfo.onclick=()=>{CH(k).fm=1;S.sel=td();save();const nb=document.querySelector('[data-nv="sem"]');if(nb)nb.click();weekOut();hoyUI()};
 const ok=$('#msgok');if(ok)ok.onclick=()=>{LS.s('dieta_msgd',String(mg.t));hoyUI()};
 const hb=$('#hnok');if(hb)hb.onclick=()=>{const cc=CH(k),m=g.out.findIndex((o,j)=>!(cc.fz&&cc.fz[j])&&!(o.it.length&&o.it.every(x=>cc.i[j+'|'+x.f.n])));if(m<0)return;g.out[m].it.forEach(({f})=>cc.i[m+'|'+f.n]=1);save();weekOut();hoyUI();toast('Comida registrada')};
@@ -2756,8 +2765,8 @@ const pend=[];for(let m=0;m<n;m++)if(!(L[m]&&L[m].length))pend.push(m);const ws=
 const G=[];for(let m=0;m<n;m++){const plan=T.k*sh[m];let g=plan,adj=false;if(any&&pend.includes(m)&&ws>0){g=rem*sh[m]/ws;adj=Math.abs(g-plan)>plan*.05}G.push({plan,g,adj,e:E[m]})}
 return{G,tot,rem,pend,n}}
 function fHint(e,g){const d=e-g;if(!e)return'';if(e<g*.85)return`<span class="hint">Te faltan unas ${r0(g-e)} kcal para la guía</span>`;if(e<=g*1.15)return'<span style="color:var(--ok);font-weight:600">✓ Dentro de la guía</span>';return`<span style="color:var(--bad,#c0392b);font-weight:600">${r0(d)} kcal sobre la guía</span>`}
-mealsC=function(T){const k=dayKey(S.sel),c=S.chk[k]||{i:{},fz:{},ov:{}},on=!!c.fm;
-const tg=`<div class="row" style="margin:0 0 10px;gap:6px"><button class="${on?'x':'pr'}" data-fm="0" aria-pressed="${!on}">Seguir el plan</button><button class="${on?'pr':'x'}" data-fm="1" aria-pressed="${on}">Registrar lo que comí</button></div>`;
+mealsC=function(T){const k=dayKey(S.sel),_e=ensureFm(k),c=S.chk[k]||{i:{},fz:{},ov:{}},on=!!c.fm;
+const tg=`<div class="row" style="margin:0 0 10px;gap:6px"><button class="${on?'x':'pr'}" data-fm="0" aria-pressed="${!on}">1 · Selección</button><button class="${on?'pr':'x'}" data-fm="1" aria-pressed="${on}">2 · Registrando</button></div>`;
 if(!on)return tg+_mcF(T);
 const G=fGuide(T,c),nm=NM[G.n],bar=(l,a,t,col,u)=>`<div class="bar"><span>${l}</span><i><span style="width:${Math.min(100,a/(t||1)*100)}%;background:${col}"></span></i><span>${r0(a)} / ${r0(t)} ${u}</span></div>`;
 const cards=G.G.map((o,m)=>{const l=(c.lg&&c.lg[m])||[];
@@ -2779,10 +2788,10 @@ $('#faq').oninput=calc;$('#fau').onchange=calc;calc();
 $('#fas2').onclick=()=>{const {x,mc}=calc();if(!(x>0)){toast('Escribe una cantidad');return}const cc=CH(k);fkOf(cc);(cc.lg[m]=cc.lg[m]||[]).push({n:f.n,x:Math.round(x*10)/10,k:mc.k,p:mc.p,c:mc.c,g:mc.g});save();weekOut();try{hoyUI()}catch(e){}$('#fam').remove();toast('Anotado: '+r0(mc.k)+' kcal')}};
 $('#fas').oninput=draw;draw();$('#fal').onclick=e=>{const b=e.target.closest('[data-i]');if(b)pick(A[+b.dataset.i])};$('#fac').onclick=()=>$('#fam').remove();setTimeout(()=>{try{$('#fas').focus()}catch(e){}},50)}
 function bindF(){const k=dayKey(S.sel),T=dayT(S.sel);
-document.querySelectorAll('[data-fm]').forEach(b=>b.onclick=()=>{const c=CH(k);c.fm=+b.dataset.fm?1:0;save();weekOut();try{hoyUI()}catch(e){}});
+document.querySelectorAll('[data-fm]').forEach(b=>b.onclick=()=>{setFmode(k,+b.dataset.fm);weekOut();try{hoyUI()}catch(e){}});
 document.querySelectorAll('[data-fa]').forEach(b=>b.onclick=()=>fAdd(+b.dataset.fa));
 document.querySelectorAll('[data-fl]').forEach(b=>b.onclick=()=>{const [m,i]=b.dataset.fl.split('|').map(Number),c=CH(k);if(c.lg&&c.lg[m]){c.lg[m].splice(i,1);save();weekOut();try{hoyUI()}catch(e){}}});
-document.querySelectorAll('[data-fp]').forEach(b=>b.onclick=()=>{const m=+b.dataset.fp,c=CH(k),g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,opt:1});if(g.miss){toast('Falta elegir alimentos para armar el plan de esta comida');return}fkOf(c);c.lg[m]=(c.lg[m]||[]).concat(g.out[m].it.map(({f,x})=>{const mc=macOf(f,x);return{n:f.n,x:Math.round(x*10)/10,k:mc.k,p:mc.p,c:mc.c,g:mc.g}}));save();weekOut();try{hoyUI()}catch(e){}toast('Se anotó lo del plan')});
+document.querySelectorAll('[data-fp]').forEach(b=>b.onclick=()=>{const m=+b.dataset.fp,c=CH(k),g=gen({...T,ov:c.ov,sw:c.sw,pk:c.pk,lk:lkOf(c),opt:1});if(g.miss){toast('Falta elegir alimentos para armar el plan de esta comida');return}fkOf(c);c.lg[m]=(c.lg[m]||[]).concat(g.out[m].it.map(({f,x})=>{const mc=macOf(f,x);return{n:f.n,x:Math.round(x*10)/10,k:mc.k,p:mc.p,c:mc.c,g:mc.g}}));save();weekOut();try{hoyUI()}catch(e){}toast('Se anotó lo del plan')});
 const z=document.querySelector('[data-fx0]');if(z)z.onclick=()=>{const c=CH(k);c.lg={};save();weekOut();try{hoyUI()}catch(e){}}}
 var _woF=weekOut;weekOut=function(){_woF();try{const w=$('#wo');if(w&&!w.querySelector('#wfm')&&S.p&&S.p.w>0){w.insertAdjacentHTML('afterbegin','<div class="row" style="margin:0 0 10px"><button class="pr" id="wfm" style="width:100%">📝 Registrar lo que comí hoy</button></div>');$('#wfm').onclick=()=>{S.sel=td();CH(dayKey(td())).fm=1;save();weekOut();const d=$('#wd');if(d)d.scrollIntoView({behavior:'smooth'})}}}catch(e){}};
 var _bxF=bindX;bindX=function(){_bxF();bindF()};
