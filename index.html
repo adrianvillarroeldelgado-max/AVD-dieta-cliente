@@ -8,8 +8,9 @@ ks.forEach(function(k){var v=g.call(L,k);if(k==='dieta1'){var o=null;try{o=JSON.
 if(g.call(L,P+k)==null)s.call(L,P+k,v)});s.call(L,P+'__m','1')}
 S.getItem=function(k){return this===L?g.call(this,P+k):g.call(this,k)};
 S.setItem=function(k,v){return this===L?s.call(this,P+k,v):s.call(this,k,v)};
-S.removeItem=function(k){return this===L?r.call(this,P+k):r.call(this,k)}}catch(e){}})();</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nhG/gGTvu0gMFDrCP7rR9vNpCVJafWVeE0RRA2egu9s=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-XBp40Qsasf8C9I1K8Bf5n6v68DzY27dzchGjJ0008TA=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+S.removeItem=function(k){return this===L?r.call(this,P+k):r.call(this,k)}}catch(e){}})();
+addEventListener('error',function(ev){if(window.__ok||window.__eb)return;var m=String((ev&&ev.message)||'error');if(/ResizeObserver|Script error|fetching the script/.test(m))return;window.__eb=1;function s(){var d=document.createElement('div');d.setAttribute('role','alert');d.style.cssText='position:fixed;left:0;right:0;top:0;z-index:99999;background:#B00020;color:#fff;padding:10px 14px;font:600 14px sans-serif';d.innerHTML='La app no pudo iniciar bien. Tus datos están guardados. <button id="__rl" style="margin-left:8px">Recargar</button><div style="font:12px monospace;opacity:.85;margin-top:4px;word-break:break-all"></div>';d.lastChild.textContent=m;document.body.appendChild(d);d.querySelector('#__rl').addEventListener('click',function(){location.reload()})}if(document.body)s();else addEventListener('DOMContentLoaded',s)});</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dAfdMSozpAH3R2DA+iDF4I8HWBxZ0bG32B+CIRVA/LQ=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-lbtI99cJeyox43Jgkneh0iATxf/eYhQOM10aBHDc+ao=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0B1F3A">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -2224,7 +2225,7 @@ const up=()=>{S.dt={k:k.value,g:$('#dtg').checked?1:0,l:$('#dtl').checked?1:0,n:
 k.onchange=up;['dtg','dtl','dtn'].forEach(i=>$('#'+i).onchange=up);dtUI()}
 
 agUI();
-['p','c','g'].forEach(k=>{const l=S.foods.filter(f=>cat(f)==k);if(l.length&&!l.some(f=>f.on))l[0].on=true});compUI();bind();foodsUI();libUI();pl();weekUI();plan();
+['p','c','g'].forEach(k=>{const l=S.foods.filter(f=>cat(f)==k);if(l.length&&!l.some(f=>f.on))l[0].on=true});compUI();bind();foodsUI();libUI();pl();try{weekUI();plan()}catch(e){window.__e0=e}
 let USER=null,PKG='',W='',UT=0,BASE='',CF2=0,SENT=0;
 const fdt=t=>t?new Date(t).toLocaleString('es-BO'):'—',jj=x=>JSON.stringify(x),jw=k=>jj({foods:k.foods,ms:k.ms||{},wk:k.wk,chk:k.chk||{}}),wj=()=>jw({foods:S.foods,ms:S.ms,wk:S.wk,chk:S.chk});
 const dy=()=>{$('#dy').textContent=USER&&wj()!==BASE?'Tienes cambios sin enviar a tu entrenador.':''};
@@ -2270,9 +2271,9 @@ document.addEventListener('keydown',e=>{if((e.key=='Enter'||e.key==' ')&&e.targe
 const mkh=()=>document.querySelectorAll('section>h2').forEach(h=>{if(!h.hasAttribute('tabindex')){h.tabIndex=0;h.setAttribute('role','button')}});
 new MutationObserver(mkh).observe(document.body,{childList:true,subtree:true});mkh();
 $('#ca').onclick=()=>{const s=[...document.querySelectorAll('section')],all=s.every(x=>x.classList.contains('col'));s.forEach(x=>x.classList.toggle('col',!all));$('#ca').textContent=all?'Contraer todo':'Expandir todo'};
-tick();setInterval(tick,30000);
+try{tick()}catch(e){window.__e0=e}setInterval(tick,30000);
 function dayKey(i){const n=new Date(),m=new Date(n.getFullYear(),n.getMonth(),n.getDate()-td()+i);return m.getFullYear()+'-'+String(m.getMonth()+1).padStart(2,'0')+'-'+String(m.getDate()).padStart(2,'0')}
-const sigOf=i=>JSON.stringify(S.wk[i].s.map(x=>[x.i,+x.m]));
+function sigOf(i){return JSON.stringify(S.wk[i].s.map(x=>[x.i,+x.m]))}
 function reconcile(i,T1){const k=dayKey(i),c=S.chk[k];if(!c)return'';const now=sigOf(i);if(!c.sig){c.sig=now;return''}if(c.sig===now)return'';
 c.i=c.i||{};c.fz=c.fz||{};c.ov=c.ov||{};const oldS=JSON.parse(c.sig),cur=S.wk[i].s,sg=a=>a.length?a.map(x=>x[0]).join(' + '):'descanso',was=sg(oldS),n=+S.p.meals,sh=shOf(n);c.sig=now;
 if(!Object.keys(c.i).length&&!Object.keys(c.fz).length){c.ov={};return''}
@@ -2912,7 +2913,9 @@ e.innerHTML=`<h2>Seguimiento de la semana</h2><div style="overflow:auto"><table 
 e.querySelectorAll('[data-ka]').forEach(b=>b.onclick=()=>{const [k,d]=b.dataset.ka.split('|'),pr=S.profiles[k];if(!pr)return;pr.p.kadj=Math.max(-600,Math.min(600,(+pr.p.kadj||0)+(+d)));save();segUI();toast('Ajuste guardado en el perfil de '+(pr.p.name||k)+'. Reenvía el plan completo.')})};
 segUI()}
 
+try{weekUI();plan()}catch(e){window.__e1=e;throw e}
 navInit();
+window.__ok=1;
 </script>
 <script>if('serviceWorker' in navigator&&location.protocol!=='file:')addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))</script>
 </body>
