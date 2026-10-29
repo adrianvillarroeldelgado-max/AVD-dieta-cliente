@@ -168,7 +168,7 @@ body[data-view=hoy] #dta>h2,body[data-view=hoy] #dta>.hint,body[data-view=hoy] #
 </section>
 <section id="alis" data-vs="ali">
 <h2>Alimentos disponibles</h2>
-<p class="hint" style="margin:0">Indica la cantidad y cuánto aporta esa cantidad. La dieta se arma solo con esta lista.</p>
+<p class="hint" style="margin:0">Elige tu tipo de dieta, marca los alimentos de cada comida y busca más en la biblioteca. La dieta se arma solo con lo que marques.</p>
 <div class="cx" id="dtc" style="margin:10px 0"><b>Mi dieta</b>
 <p class="hint">Elige tu tipo de dieta. La biblioteca bloqueará los alimentos que no puedas consumir y te avisará por qué.</p>
 <label>Tipo de dieta<select id="dtk"></select></label>
@@ -184,8 +184,11 @@ body[data-view=hoy] #dta>h2,body[data-view=hoy] #dta>.hint,body[data-view=hoy] #
 <div class="row" style="margin-top:8px"><select id="agm" style="width:auto"><option value="r">Reemplazar la lista actual</option><option value="a">Agregar a la lista actual</option></select><button class="pr" id="agb">Generar lista</button></div>
 <p class="hint" id="agi" role="status"></p></details>
 
-<div class="tw"><table><thead><tr><th>Alimento</th><th>Cant. (g)</th><th>kcal</th><th>Prot.</th><th>Carb.</th><th>Grasa</th><th></th></tr></thead><tbody id="ft"></tbody></table></div>
-<div class="lib"><h3 class="lh">Biblioteca de alimentos bolivianos</h3><div class="row" id="lt" style="margin:8px 0"></div><input id="ls" type="search" placeholder="Buscar alimento…" aria-label="Buscar en la biblioteca"><div class="ll" id="ll"></div><p class="hint">El buscador revisa todas las categorías. Valores aproximados por 100 g (con la preparación indicada). Platos típicos y comunes: valores estimados por porción estándar; cambian según receta, tamaño y local. Compáralos con la etiqueta o tu receta si necesitas precisión. Huevos y frutas se dosifican por unidad. Lácteos PIL: no encontré su tabla nutricional oficial, así que son valores típicos de cada variedad; revisa el empaque y edita si difiere.</p></div>
+<div class="tw" style="display:none" aria-hidden="true"><table><thead><tr><th>Alimento</th><th>Cant. (g)</th><th>kcal</th><th>Prot.</th><th>Carb.</th><th>Grasa</th><th></th></tr></thead><tbody id="ft"></tbody></table></div>
+</section>
+<section data-vs="ali" id="selc"><h2>Selección de alimentos</h2><p class="hint" style="margin:0 0 12px;max-width:70ch">Elige una comida y marca los alimentos que usarás en ella, uno o más de cada macronutriente. Cada comida puede tener alimentos distintos. La cantidad de cada uno se calcula sola para cumplir lo que esa comida necesita; si marcas varios en un grupo, se reparte el aporte entre ellos.</p><div id="sd"></div><div id="st"></div><div class="sg" id="sl"></div><div id="sa"></div></section>
+<section id="libs" data-vs="ali"><h2>Biblioteca de alimentos</h2>
+<div class="lib"><div class="row" id="lt" style="margin:8px 0"></div><input id="ls" type="search" placeholder="Buscar alimento…" aria-label="Buscar en la biblioteca"><div class="ll" id="ll"></div><p class="hint">El buscador revisa todas las categorías. Valores aproximados por 100 g (con la preparación indicada). Platos típicos y comunes: valores estimados por porción estándar; cambian según receta, tamaño y local. Compáralos con la etiqueta o tu receta si necesitas precisión. Huevos y frutas se dosifican por unidad. Lácteos PIL: no encontré su tabla nutricional oficial, así que son valores típicos de cada variedad; revisa el empaque y edita si difiere.</p></div>
 <div class="f" style="margin-top:12px"><label>Medida práctica (opcional, ej. taza)<input id="mu" type="text" placeholder="taza"></label><label>Gramos por medida<input id="mw" type="number" min="1" step="0.5"></label></div>
 <div class="add">
 <label>Alimento<input id="n" type="text" placeholder="Ej. Charque"></label>
@@ -197,7 +200,6 @@ body[data-view=hoy] #dta>h2,body[data-view=hoy] #dta>.hint,body[data-view=hoy] #
 <button class="pr" id="af">Añadir alimento</button>
 </div>
 </section>
-<section data-vs="ali" id="selc"><h2>Selección de alimentos</h2><p class="hint" style="margin:0 0 12px;max-width:70ch">Elige una comida y marca los alimentos que usarás en ella, uno o más de cada macronutriente. Cada comida puede tener alimentos distintos. La cantidad de cada uno se calcula sola para cumplir lo que esa comida necesita; si marcas varios en un grupo, se reparte el aporte entre ellos.</p><div id="sd"></div><div id="st"></div><div class="sg" id="sl"></div><div id="sa"></div></section>
 <section id="wk" data-vs="sem"></section>
 <section id="dta" data-vs="sem"><h2>Dieta de la semana</h2><p class="hint" style="margin:0 0 4px;max-width:70ch">Calorías y macros de cada día según tu rutina, y las comidas del día elegido. Pulsa "Ver comidas" en un día para ver su detalle.</p><div class="tw"><div id="wo"></div></div><div id="wd"></div></section>
 <section id="prg" data-vs="pro"><h2>Mi progreso</h2><div id="prgb"></div></section>
