@@ -10,7 +10,7 @@ S.getItem=function(k){return this===L?g.call(this,P+k):g.call(this,k)};
 S.setItem=function(k,v){return this===L?s.call(this,P+k,v):s.call(this,k,v)};
 S.removeItem=function(k){return this===L?r.call(this,P+k):r.call(this,k)}}catch(e){}})();
 addEventListener('error',function(ev){if(window.__ok||window.__eb)return;var m=String((ev&&ev.message)||'error');if(/ResizeObserver|Script error|fetching the script/.test(m))return;window.__eb=1;function s(){var d=document.createElement('div');d.setAttribute('role','alert');d.style.cssText='position:fixed;left:0;right:0;top:0;z-index:99999;background:#B00020;color:#fff;padding:10px 14px;font:600 14px sans-serif';d.innerHTML='La app no pudo iniciar bien. Tus datos están guardados. <button id="__rl" style="margin-left:8px">Recargar</button><div style="font:12px monospace;opacity:.85;margin-top:4px;word-break:break-all"></div>';d.lastChild.textContent=m;document.body.appendChild(d);d.querySelector('#__rl').addEventListener('click',function(){location.reload()})}if(document.body)s();else addEventListener('DOMContentLoaded',s)});</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dAfdMSozpAH3R2DA+iDF4I8HWBxZ0bG32B+CIRVA/LQ=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-BJQTVwBJbNszksX2y7nRrhsr2roIEOLDUVdvuMCRJS0=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dAfdMSozpAH3R2DA+iDF4I8HWBxZ0bG32B+CIRVA/LQ=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-BKIw27jGi9yrIqcBnI1+hZA/8gVhUq8qgQmgg3tfxUo=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0B1F3A">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -344,9 +344,12 @@ const TY={descanso:'Descanso',liviano:'Entreno liviano',mediano:'Entreno mediano
 const CG={descanso:3,liviano:4.5,mediano:6,fuerte:7.5,partido:8},MT={descanso:0,liviano:3,mediano:5.5,fuerte:8,partido:8};
 const O={descanso:0,liviano:1,mediano:2,fuerte:3,partido:4};
 const topI=d=>d.s.reduce((b,x)=>O[x.i]>O[b]?x.i:b,'descanso'),hasM=d=>d.s.some(x=>x.i=='partido');
-const lab=i=>{const d=S.wk[i],n=d.s.length;return n?n+(n>1?' sesiones: ':' sesión: ')+d.s.map(x=>x.i).join(' + '):'Descanso'};
+const lab=i=>{const d=effDay(i),n=d.s.length;return n?n+(n>1?' sesiones: ':' sesión: ')+d.s.map(x=>x.i).join(' + '):'Descanso'};
 S.wk=[[['fuerte',60]],[['mediano',60],['liviano',30]],[['liviano',45]],[['fuerte',60]],[],[['partido',90]],[]].map(a=>({s:a.map(x=>({i:x[0],m:x[1]}))}));S.sel=(new Date().getDay()+6)%7;
-function dayT(i){ageSync();const d=S.wk[i],p=S.p,w=p.w,nx=S.wk[(i+1)%7],t=topI(d),carga=hasM(nx)&&!hasM(d);
+function effDay(i){const d=S.wk[i],g=(S.p&&S.p.games)||[];if(!g.length||!Array.isArray(g))return d;const k=dayKey(i);if(g.includes(k)&&!hasM(d))return{s:[{i:'partido',m:90}]};return d}
+function dts(dt){return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0')}
+function nextHasM(i){if(i<6)return hasM(effDay(i+1));const g=(S.p&&S.p.games)||[],n=new Date(dayKey(6)+'T00:00:00');n.setDate(n.getDate()+1);return hasM(S.wk[0])||(Array.isArray(g)&&g.includes(dts(n)))}
+function dayT(i){ageSync();const d=effDay(i),p=S.p,w=p.w,t=topI(d),carga=nextHasM(i)&&!hasM(d);
 let cg=CG[t]+Math.max(0,d.s.length-1)*.75;if(carga)cg=Math.max(cg,7);cg*=({per:.85,man:1,gan:1.1}[p.goal]);
 const P=(({res:1.5,fue:1.9,mix:1.7}[p.sport])+(p.goal=='per'?.3:0))*w,C=cg*w+(+p.kadj||0)/4,G=(t=='descanso'||t=='liviano'?1.1:.9)*w;
 const bmr=10*w+6.25*p.h-5*p.age+(p.sex=='m'?5:-161);
@@ -2279,7 +2282,7 @@ new MutationObserver(mkh).observe(document.body,{childList:true,subtree:true});m
 $('#ca').onclick=()=>{const s=[...document.querySelectorAll('section')],all=s.every(x=>x.classList.contains('col'));s.forEach(x=>x.classList.toggle('col',!all));$('#ca').textContent=all?'Contraer todo':'Expandir todo'};
 try{tick()}catch(e){window.__e0=e}setInterval(tick,30000);
 function dayKey(i){const n=new Date(),m=new Date(n.getFullYear(),n.getMonth(),n.getDate()-td()+i);return m.getFullYear()+'-'+String(m.getMonth()+1).padStart(2,'0')+'-'+String(m.getDate()).padStart(2,'0')}
-function sigOf(i){return JSON.stringify(S.wk[i].s.map(x=>[x.i,+x.m]))}
+function sigOf(i){return JSON.stringify(effDay(i).s.map(x=>[x.i,+x.m]))}
 function reconcile(i,T1){const k=dayKey(i),c=S.chk[k];if(!c)return'';const now=sigOf(i);if(!c.sig){c.sig=now;return''}if(c.sig===now)return'';
 c.i=c.i||{};c.fz=c.fz||{};c.ov=c.ov||{};const oldS=JSON.parse(c.sig),cur=S.wk[i].s,sg=a=>a.length?a.map(x=>x[0]).join(' + '):'descanso',was=sg(oldS),n=+S.p.meals,sh=shOf(n);c.sig=now;
 if(!Object.keys(c.i).length&&!Object.keys(c.fz).length){c.ov={};return''}
@@ -2721,6 +2724,27 @@ el.querySelectorAll('[data-sd]').forEach(e=>e.onchange=()=>{const d=supDay(),t=d
 el.querySelectorAll('[data-sx]').forEach(b=>b.onclick=ev=>{ev.preventDefault();LS.sj('dieta_sup',supList().filter(x=>x!=b.dataset.sx));hoyUI()})}catch(e){}}
 if(LS.g('dieta_big','')=='1')document.body.classList.add('big');
 if($('#hoyc')&&APPN=='c'){const _h=hoyUI;hoyUI=function(){_h();hoyX()}}
+
+/*feat11: plan semanal con plantillas, reinicios y partidos con fecha*/
+const PRESETS=[
+{n:'Semana sin partido',wk:[[['fuerte',60]],[['mediano',60]],[['liviano',45]],[['fuerte',60]],[['mediano',45]],[['liviano',60]],[]]},
+{n:'Semana con partido el domingo',wk:[[['fuerte',60]],[['mediano',60]],[['liviano',45]],[['mediano',45]],[['liviano',30]],[],[['partido',90]]]},
+{n:'Semana con partido el sábado',wk:[[['fuerte',60]],[['mediano',60]],[['liviano',45]],[['liviano',30]],[],[['partido',90]],[]]},
+{n:'Semana con 2 partidos (miércoles y sábado)',wk:[[['fuerte',60]],[['mediano',45]],[['partido',90]],[['liviano',30]],[],[['partido',90]],[]]},
+{n:'Semana con partido entre semana (miércoles)',wk:[[['fuerte',60]],[['liviano',45]],[['partido',90]],[['liviano',30]],[['fuerte',60]],[['mediano',60]],[]]},
+{n:'Semana de descarga / recuperación',wk:[[['liviano',30]],[],[['liviano',30]],[],[['liviano',30]],[],[['liviano',30]]]}];
+function gamesClean(){const p=S.p;if(!p)return[];if(!Array.isArray(p.games))p.games=[];const lim=dts(new Date(Date.now()-8*864e5));p.games=[...new Set(p.games.filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(String(x))&&x>=lim))].sort();return p.games}
+function planX(){const w=$('#wk');if(!w||w.querySelector('#wpx'))return;const G=gamesClean(),today=dayKey(td()),fmt=k=>{const d=new Date(k+'T00:00:00');return DN[(d.getDay()+6)%7]+' '+d.getDate()+'/'+(d.getMonth()+1)},prev=k=>{const d=new Date(k+'T00:00:00');d.setDate(d.getDate()-1);return fmt(dts(d))};
+w.insertAdjacentHTML('afterbegin',`<div class="cx" id="wpx" style="margin:0 0 12px"><b>Plan de semana</b><div class="f" style="margin-top:8px"><label style="grid-column:1/-1">Plantilla de semana<select id="wpp">${PRESETS.map((p,i)=>`<option value="${i}">${p.n}</option>`).join('')}</select></label></div><div class="row"><button class="pr" id="wpa">Aplicar plantilla</button><button class="x" id="wpr">Reiniciar semana (todo en descanso)</button><button class="x" id="wps">Reiniciar selecciones de alimentos</button></div><p class="hint" id="wpm" role="status">La plantilla reemplaza los entrenamientos de la semana; luego puedes ajustar cada día. «Reiniciar selecciones» vuelve a marcar, en cada comida, todos los alimentos de tu lista.</p>
+<h4 style="margin:12px 0 4px">Partidos con fecha</h4><p class="hint" style="margin:0 0 6px">Para un partido puntual (por ejemplo el lunes de la próxima semana). La app trata ese día como día de partido y aplica carga de carbohidratos el día anterior, aunque sea de otra semana.</p><div class="row" style="align-items:flex-end"><label style="flex:1">Fecha del partido<input type="date" id="wgd" min="${today}"></label><button id="wga">Agregar partido</button></div>${G.length?`<ul class="sl" id="wgl" style="margin-top:8px">${G.map(k=>`<li><span>⚽ ${fmt(k)} · carga el ${prev(k)}</span><button class="x" data-gx="${k}" aria-label="Quitar partido">Quitar</button></li>`).join('')}</ul>`:''}</div>`);
+const m=t=>{const e=$('#wpm');if(e)e.textContent=t},two=(id,fn)=>{const b=$(id);if(!b)return;const t0=b.textContent;b.onclick=()=>{if(b.dataset.c){delete b.dataset.c;b.textContent=t0;fn();return}b.dataset.c=1;b.textContent='¿Seguro? Pulsa otra vez';setTimeout(()=>{if(b.dataset.c){delete b.dataset.c;b.textContent=t0}},4000)}};
+const after=()=>{save();weekUI();try{plan()}catch(e){}try{weekOut()}catch(e){}try{hoyUI()}catch(e){}};
+two('#wpa',()=>{const p=PRESETS[+$('#wpp').value];S.wk=p.wk.map(a=>({s:a.map(x=>({i:x[0],m:x[1]}))}));after();m('Plantilla aplicada: '+p.n+'.');toast('Plantilla aplicada')});
+two('#wpr',()=>{S.wk=[0,1,2,3,4,5,6].map(()=>({s:[]}));after();m('Semana reiniciada: todos los días en descanso.')});
+two('#wps',()=>{Object.keys(S.ms||{}).forEach(k=>{if(Array.isArray(S.ms[k]))delete S.ms[k]});try{foodsUI()}catch(e){}after();m('Selecciones de alimentos reiniciadas.')});
+const ga=$('#wga');if(ga)ga.onclick=()=>{const v=$('#wgd').value;if(!v){m('Elige la fecha del partido.');return}if(v<today){m('La fecha ya pasó.');return}const g=gamesClean();if(!g.includes(v))g.push(v);S.p.games=g.sort();after();m('Partido agregado. Carga de carbohidratos el '+prev(v)+'.')};
+document.querySelectorAll('[data-gx]').forEach(b=>b.onclick=()=>{S.p.games=gamesClean().filter(x=>x!=b.dataset.gx);after();m('Partido quitado.')})}
+{const _w=weekUI;weekUI=function(){_w.apply(this,arguments);try{planX()}catch(e){}}}
 
 /* ---------- Recordatorios de comidas y agua (cliente) ---------- */
 function rmDef(n){if(n==4&&S.p&&S.p.mer4=='m')return['07:30','10:00','13:00','20:00'];const T={2:['08:00','14:00'],3:['07:30','13:00','20:00'],4:['07:30','13:00','16:30','20:00'],5:['07:30','10:00','13:00','16:30','20:00'],6:['07:30','10:00','13:00','16:30','20:00','22:00']};if(T[n])return T[n].slice();const a=[];for(let i=0;i<n;i++){const t=7*60+Math.round(i*(13.5*60)/Math.max(1,n-1));a.push(String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0'))}return a}
