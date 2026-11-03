@@ -10,7 +10,7 @@ S.getItem=function(k){return this===L?g.call(this,P+k):g.call(this,k)};
 S.setItem=function(k,v){return this===L?s.call(this,P+k,v):s.call(this,k,v)};
 S.removeItem=function(k){return this===L?r.call(this,P+k):r.call(this,k)}}catch(e){}})();
 addEventListener('error',function(ev){if(window.__ok||window.__eb)return;var m=String((ev&&ev.message)||'error');if(/ResizeObserver|Script error|fetching the script/.test(m))return;window.__eb=1;function s(){var d=document.createElement('div');d.setAttribute('role','alert');d.style.cssText='position:fixed;left:0;right:0;top:0;z-index:99999;background:#B00020;color:#fff;padding:10px 14px;font:600 14px sans-serif';d.innerHTML='La app no pudo iniciar bien. Tus datos están guardados. <button id="__rl" style="margin-left:8px">Recargar</button><div style="font:12px monospace;opacity:.85;margin-top:4px;word-break:break-all"></div>';d.lastChild.textContent=m;document.body.appendChild(d);d.querySelector('#__rl').addEventListener('click',function(){location.reload()})}if(document.body)s();else addEventListener('DOMContentLoaded',s)});</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dAfdMSozpAH3R2DA+iDF4I8HWBxZ0bG32B+CIRVA/LQ=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-08OO5/u4evtZb3T0RAXgwOhlfAxjthHiebxN469Rpp4=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dAfdMSozpAH3R2DA+iDF4I8HWBxZ0bG32B+CIRVA/LQ=' 'sha256-qU6DWBX1VQveXc9TeII3EBmDYmINnhxrhR7cnB9/C0k=' 'sha256-dheNZY6ZIWTspixUVMxBh4K0z0qtTCs3rWMJW1r1GxI=' 'sha256-qTUVFwDT7jtOQUGPpvZZ789mgKOS7fx5MgwbD3DRowo=' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://world.openfoodfacts.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0B1F3A">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -2172,10 +2172,109 @@ const REV=[['Quinua cocida',89,2.8,16.3,1.3,'Tablas Peruanas de Composición de 
 ['Leche deslactosada Delizia',60,3,4.9,2.8,'Open Food Facts: etiqueta Delizia (leche deslactosada UHT 800 ml), por 100 ml']];
 (()=>{const m=new Map(REV.map(r=>[r[0],r]));const up=f=>{const r=m.get(f.n);if(r&&f.src!==r[5]){f.k=r[1];f.p=r[2];f.c=r[3];f.g=r[4];f.src=r[5]}};LIB.forEach(up);window._upSrc=up})();
 LIB.forEach(f=>{ap(f);if(!f.w){f.u='porción';f.w=100;f.s=.5;(window._fb=window._fb||[]).push(f.n)}});S.foods.forEach(ap);S.foods.forEach(window._upSrc);
-const lf=(f,k)=>k=='k'?!!f.ce:(k=='t'||k=='m'||k=='s'||k=='v'||k=='x')?f.dt==k:!f.dt&&cat(f)==k;
+const NEWR=`Coca-Cola (con azúcar)|vaso|250|10.6|0|0
+Fanta Naranja|vaso|250|11.0|0|0
+Fanta Uva|vaso|250|11.0|0|0
+Fanta Papaya|vaso|250|11.0|0|0
+Fanta Limón|vaso|250|10.5|0|0
+Sprite (con azúcar)|vaso|250|9.0|0|0
+Pepsi (con azúcar)|vaso|250|10.9|0|0
+7UP (con azúcar)|vaso|250|10.0|0|0
+Mirinda Naranja|vaso|250|11.2|0|0
+Simba Cola|vaso|250|10.5|0|0
+Simba Naranja|vaso|250|11.5|0|0
+Simba Uva|vaso|250|11.0|0|0
+Simba Limón|vaso|250|10.0|0|0
+Big Cola|vaso|250|10.8|0|0
+Guaraná (gaseosa)|vaso|250|10.5|0|0
+Inca Kola|vaso|250|11.0|0|0
+Crush Naranja|vaso|250|11.5|0|0
+Schweppes Tónica (con azúcar)|vaso|250|8.7|0|0
+Schweppes Ginger Ale (con azúcar)|vaso|250|8.5|0|0
+Gaseosa de manzana|vaso|250|11.0|0|0
+Gaseosa de piña|vaso|250|11.5|0|0
+Gaseosa de pomelo (toronja)|vaso|250|10.5|0|0
+Gaseosa de limón|vaso|250|10.0|0|0
+Gaseosa cola económica (marca blanca)|vaso|250|10.5|0|0
+Malta (bebida de malta)|botella|330|11.5|0.4|0
+Aquarius Naranja|vaso|250|4.3|0|0
+Aquarius Limón|vaso|250|4.3|0|0
+Aquarius Durazno|vaso|250|4.3|0|0
+Aquarius Pomelo|vaso|250|4.3|0|0
+Cifrut Naranja|vaso|250|6.5|0|0
+Cifrut Ponche de frutas|vaso|250|6.5|0|0
+Gatorade Naranja|botella|500|6.0|0|0
+Gatorade Limón-lima|botella|500|6.0|0|0
+Gatorade Uva|botella|500|6.0|0|0
+Gatorade Ponche de frutas|botella|500|6.0|0|0
+Powerade Naranja|botella|500|6.0|0|0
+Powerade Uva|botella|500|6.0|0|0
+Sporade Mandarina|botella|500|6.0|0|0
+Sporade Limón|botella|500|6.0|0|0
+Bebida isotónica (genérica)|botella|500|6.0|0|0
+Bebida isotónica en polvo preparada|botella|500|5.5|0|0
+Red Bull|lata|250|11.3|0.4|0
+Monster Energy|lata|473|11.0|0|0
+Volt (bebida energética)|lata|300|11.0|0|0
+Burn (bebida energética)|lata|250|11.0|0|0
+Speed (bebida energética)|lata|250|10.8|0|0
+Bebida energética (genérica)|lata|250|11.0|0|0
+Lipton Ice Tea Limón|botella|500|5.5|0|0
+Lipton Ice Tea Durazno|botella|500|5.5|0|0
+Nestea Limón|botella|500|6.0|0|0
+Nestea Durazno|botella|500|6.0|0|0
+Free Tea Limón|botella|500|6.5|0|0
+Té helado casero con azúcar|vaso|250|6.0|0|0
+Del Valle Durazno (néctar)|vaso|250|11.0|0.1|0
+Del Valle Naranja (néctar)|vaso|250|10.5|0.2|0
+Del Valle Manzana (néctar)|vaso|250|11.0|0.1|0
+Del Valle Mango (néctar)|vaso|250|12.0|0.1|0
+Del Valle Piña (néctar)|vaso|250|11.5|0.1|0
+Del Valle Uva (néctar)|vaso|250|12.0|0.1|0
+Del Valle Frutas tropicales (néctar)|vaso|250|11.5|0.1|0
+Del Valle Guayaba (néctar)|vaso|250|11.0|0.2|0
+Néctar de durazno (genérico)|vaso|250|11.0|0.1|0
+Néctar de mango (genérico)|vaso|250|12.0|0.1|0
+Néctar de naranja (genérico)|vaso|250|10.5|0.2|0
+Néctar de manzana (genérico)|vaso|250|11.0|0.1|0
+Néctar de maracuyá (genérico)|vaso|250|11.5|0.2|0
+Néctar de piña (genérico)|vaso|250|11.5|0.1|0
+Refresco de ponche de frutas (envasado)|vaso|250|7.0|0|0
+Refresco en polvo tipo Tang preparado|vaso|250|6.5|0|0
+Refresco en polvo tipo Kool-Aid preparado con azúcar|vaso|250|7.0|0|0
+Jugo de naranja con azúcar|vaso|250|10.5|0.7|0.1
+Jugo de papaya con azúcar|vaso|250|10.0|0.4|0.1
+Jugo de durazno con azúcar|vaso|250|11.0|0.4|0.1
+Jugo de maracuyá con azúcar|vaso|250|11.5|0.4|0.2
+Jugo de piña con azúcar|vaso|250|11.5|0.3|0.1
+Jugo de mango con azúcar|vaso|250|13.0|0.4|0.1
+Jugo de sandía con azúcar|vaso|250|8.5|0.3|0.1
+Jugo de tumbo (curuba) con azúcar|vaso|250|10.5|0.4|0.1
+Limonada con azúcar|vaso|250|8.0|0|0
+Naranjada con azúcar|vaso|250|9.0|0.2|0
+Limonada con soda azucarada|vaso|250|9.0|0|0
+Mocochinchi|vaso|250|12.0|0.2|0
+Somó|vaso|250|9.0|0.4|0.1
+Refresco de linaza con azúcar|vaso|250|6.0|0.2|0.5
+Refresco de cebada|vaso|250|9.0|0.4|0.1
+Refresco de tamarindo|vaso|250|10.0|0.1|0
+Chicha de maní (sin alcohol)|vaso|250|12.0|1.5|3.0
+Horchata de arroz|vaso|250|8.0|0.5|0.2
+Refresco de maracuyá preparado|vaso|250|9.0|0.2|0.1
+Refresco de durazno preparado|vaso|250|9.5|0.2|0
+Ponche de frutas (refresco casero)|vaso|250|9.0|0.2|0
+Refresco de piña casero|vaso|250|9.0|0.2|0
+Chocolate frío azucarado|vaso|250|12.0|2.0|2.0
+Café helado azucarado|vaso|250|8.0|0.3|0.1
+Granizado de limón con azúcar|vaso|250|13.0|0|0
+Refresco de manzana casero|vaso|250|9.0|0.1|0
+Refresco de canela con azúcar|vaso|250|6.0|0|0`;
+LIB.forEach(f=>{if(/^(Api morado|Api blanco|Tojorí)$/.test(f.n)&&f.dt!='r'){f.dt='r';f.cat='c';f.pil=1}});
+(()=>{const SRC='Valor aproximado por 100 ml (etiquetas típicas de la marca o referencia). Verifica con la etiqueta de tu producto y usa "Editar valores" si difiere.',add=NEWR.split('\n').map(l=>{const a=l.split('|'),c=+a[3],p=+a[4],g=+a[5];return{n:a[0],q:100,k:Math.round(p*4+c*4+g*9),p,c,g,u:a[1],w:+a[2],s:1,dt:'r',cat:'c',pil:1,src:SRC}});add.forEach(d=>{UN[d.n]=[d.u,d.w,d.s]});LIB.push(...add)})();
+const lf=(f,k)=>k=='k'?!!f.ce:(k=='t'||k=='m'||k=='s'||k=='v'||k=='x'||k=='r')?f.dt==k:!f.dt&&cat(f)==k;
 LIB.forEach(f=>{if(/Coronilla/.test(f.n)&&!f.dt&&cat(f)=='c')f.ce=1});
 const SUPL=()=>{try{return JSON.parse(localStorage.getItem('dieta_sup'))||[]}catch(e){return[]}};
-const GO=['p','c','k','g','v','x','t','m','s'],GR={p:['Proteínas','var(--p)','#fff'],c:['Carbohidratos','var(--c)','#fff'],k:['Celíacos','#0E7C86','#fff'],g:['Grasas','var(--g)','#1c1c1d'],v:['Verduras y ensaladas','#2F8F5B','#fff'],x:['Suplementos','#7B4FD0','#fff'],t:['Platos típicos','#C2571A','#fff'],m:['Platos comunes','#1F8AA8','#fff'],s:['Snacks','#C23B7A','#fff']},gk=f=>f.dt||cat(f);
+const GO=['p','c','r','k','g','v','x','t','m','s'],GR={r:['Refrescos','#D6455D','#fff'],p:['Proteínas','var(--p)','#fff'],c:['Carbohidratos','var(--c)','#fff'],k:['Celíacos','#0E7C86','#fff'],g:['Grasas','var(--g)','#1c1c1d'],v:['Verduras y ensaladas','#2F8F5B','#fff'],x:['Suplementos','#7B4FD0','#fff'],t:['Platos típicos','#C2571A','#fff'],m:['Platos comunes','#1F8AA8','#fff'],s:['Snacks','#C23B7A','#fff']},gk=f=>f.dt||cat(f);
 function libUI(){$('#lt').innerHTML=GO.map(k=>{const on=k==LT,c=GR[k][1];return`<button data-lt="${k}" style="border:2px solid ${c};${on?`background:${c};color:${GR[k][2]}`:`border-left-width:6px`}">${GR[k][0]} (${LIB.filter(f=>lf(f,k)).length})</button>`}).join('');
 document.querySelectorAll('[data-lt]').forEach(b=>b.onclick=()=>{LT=b.dataset.lt;libUI()});libList()}
 function libList(){const nz=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),q=nz($('#ls').value.trim()),l=LIB.filter(f=>(q?nz(f.n).includes(q):lf(f,LT)));if(q)l.sort((a,b)=>GO.indexOf(gk(a))-GO.indexOf(gk(b)));
@@ -2202,7 +2301,7 @@ o.grain=T(/arroz|quinua|\bmote|maiz|choclo|avena|trigo|\bpan\b|fideo|cebada|cana
 o.sugar=T(/dextrosa|maltodextrina|ciclodextrina|gel energetico|azucar|chancaca|mermelada|gaseosa|nectar|mocochinchi|chicha|\bapi\b|condensada|dulce de leche|chocolate|chantilly|galleta|cereal|jugo|isotonica|saborizada|caramelo|helado|palomitas/);
 o.seedoil=T(/aceite de (soya|girasol|maiz|mani)|aceite vegetal|margarina|manteca vegetal/);
 o.proc=f.dt=='x'||o.sugar||o.honey||T(/frita|frito|broaster|chicharron|papas fritas|snack de|salsa golf|mayonesa|manteca|sebo|margarina|mortadela|salchicha|harina|aceite vegetal|chorizo|longaniza|tocino|gelatina|gomitas/);
-o.drink=T(/isotonica|gaseosa|jugo|nectar|mocochinchi|chicha|\bapi\b|saborizada|bebible/);
+o.drink=T(/isotonica|gaseosa|jugo|nectar|mocochinchi|chicha|\bapi\b|saborizada|bebible/);if(f.dt=='r'){o.sugar=true;o.proc=true;o.drink=true}
 o.c100=per('c');o.g100=per('g');o.p100=per('p');return o};
 const AGD={n:['Sin restricción (aleatoria)',()=>true],
 v:['Vegetariana',x=>!x.meat&&!x.fish],
